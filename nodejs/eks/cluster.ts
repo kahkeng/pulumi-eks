@@ -247,7 +247,7 @@ export function getRoleProvider(
                 {
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::${id.accountId}:root"
+                    "AWS": "arn:aws-cn:iam::${id.accountId}:root"
                 },
                 "Action": "sts:AssumeRole"
                 }
@@ -387,8 +387,8 @@ export function createCore(name: string, args: ClusterOptions, parent: pulumi.Co
             service: "eks.amazonaws.com",
             description: "Allows EKS to manage clusters on your behalf.",
             managedPolicyArns: [
-                "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
-                "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+                "arn:aws-cn:iam::aws:policy/AmazonEKSClusterPolicy",
+                "arn:aws-cn:iam::aws:policy/AmazonEKSServicePolicy",
             ],
         }, { parent, provider })).role;
     }
@@ -547,11 +547,11 @@ export function createCore(name: string, args: ClusterOptions, parent: pulumi.Co
         instanceRoles = pulumi.output([args.instanceRole]);
     } else {
         const instanceRole = (new ServiceRole(`${name}-instanceRole`, {
-            service: "ec2.amazonaws.com",
+            service: "ec2.amazonaws.com.cn",
             managedPolicyArns: [
-                "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
-                "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-                "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+                "arn:aws-cn:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+                "arn:aws-cn:iam::aws:policy/AmazonEKS_CNI_Policy",
+                "arn:aws-cn:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
             ],
         }, { parent, provider })).role;
 
